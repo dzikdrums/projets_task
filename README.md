@@ -9,8 +9,13 @@ In the project directory, you can run:
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+It runs a local server as well with json-server.<br />
+Local server is hosted on [http://localhost:8000](http://localhost:8000).
+
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
+
+
 
 ### `npm build`
 
