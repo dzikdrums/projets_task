@@ -1,26 +1,3 @@
 {
-  "people": [
-    {
-      "name": {
-        "first": "Chloe",
-        "last": "Freeman"
-      },
-      "email": "chloe.freeman@example.com",
-      "city": "Townsville",
-      "country": "Australia",
-      "thumbnail": "https://randomuser.me/api/portraits/thumb/women/1.jpg",
-      "id": 1
-    },
-    {
-      "name": {
-        "first": "Melike",
-        "last": "Dalkıran"
-      },
-      "email": "melike.dalkiran@example.com",
-      "city": "Isparta",
-      "country": "Turkey",
-      "thumbnail": "https://randomuser.me/api/portraits/thumb/women/78.jpg",
-      "id": 2
-    }
-  ]
+  "people": []
 }
