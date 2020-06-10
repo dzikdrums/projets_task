@@ -1,0 +1,26 @@
+{
+  "people": [
+    {
+      "name": {
+        "first": "Katherine",
+        "last": "Craig"
+      },
+      "email": "katherine.craig@example.com",
+      "city": "Winchester",
+      "country": "United Kingdom",
+      "thumbnail": "https://randomuser.me/api/portraits/thumb/women/5.jpg",
+      "id": 1
+    },
+    {
+      "name": {
+        "first": "Roland",
+        "last": "Gonzalez"
+      },
+      "email": "roland.gonzalez@example.com",
+      "city": "Maitland",
+      "country": "Australia",
+      "thumbnail": "https://randomuser.me/api/portraits/thumb/men/4.jpg",
+      "id": 2
+    }
+  ]
+}
