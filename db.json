@@ -2,24 +2,24 @@
   "people": [
     {
       "name": {
-        "first": "Katherine",
-        "last": "Craig"
+        "first": "Chloe",
+        "last": "Freeman"
       },
-      "email": "katherine.craig@example.com",
-      "city": "Winchester",
-      "country": "United Kingdom",
-      "thumbnail": "https://randomuser.me/api/portraits/thumb/women/5.jpg",
+      "email": "chloe.freeman@example.com",
+      "city": "Townsville",
+      "country": "Australia",
+      "thumbnail": "https://randomuser.me/api/portraits/thumb/women/1.jpg",
       "id": 1
     },
     {
       "name": {
-        "first": "Roland",
-        "last": "Gonzalez"
+        "first": "Melike",
+        "last": "Dalkıran"
       },
-      "email": "roland.gonzalez@example.com",
-      "city": "Maitland",
-      "country": "Australia",
-      "thumbnail": "https://randomuser.me/api/portraits/thumb/men/4.jpg",
+      "email": "melike.dalkiran@example.com",
+      "city": "Isparta",
+      "country": "Turkey",
+      "thumbnail": "https://randomuser.me/api/portraits/thumb/women/78.jpg",
       "id": 2
     }
   ]
