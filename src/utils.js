@@ -1,8 +1,9 @@
 export const convertData = (data) => {
   const formatedData = [];
 
-  const formatData = (record) => {
+  const formatData = (record, index) => {
     const formatedRecord = {
+      id: index + 1,
       name: {
         first: record.name.first,
         last: record.name.last,

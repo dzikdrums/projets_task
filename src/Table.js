@@ -25,12 +25,7 @@ const TableOfPeople = ({ data, removeItem, editItem, request }) => {
     setEditIdx(id);
     setEditedRow({
       id: data[index].id,
-      firstName: data[index].name.first,
-      lastName: data[index].name.last,
-      city: data[index].city,
-      country: data[index].country,
-      email: data[index].email,
-      thumbnail: data[index].thumbnail,
+      email: '',
     });
   };
 

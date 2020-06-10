@@ -117,7 +117,7 @@ export const loadFromExternalServerRequest = () => {
     dispatch(startRequest());
     try {
       const res = await axios.get(
-        `${EXTERNAL_API_URL}?results=2&inc=name,location,email,picture`
+        `${EXTERNAL_API_URL}?results=10&inc=name,location,email,picture`
       );
 
       async function pushToLocalServer(record) {
