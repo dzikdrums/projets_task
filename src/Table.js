@@ -24,15 +24,77 @@ const clearEditedRow = {
   thumbnail: '',
 };
 
+const tableHeaders = [
+  'Name',
+  'Surname',
+  'Email',
+  'City',
+  'Country',
+  'Thumbnail',
+  'Actions',
+];
+
+const textFields = [
+  'firstName',
+  'lastName',
+  'email',
+  'city',
+  'country',
+  'thumbnail',
+];
+
+const DeleteModal = ({ openModal, erase, setOpenModal }) => {
+  return (
+    <Modal open={openModal === 'delete'} className="modal">
+      <div className="confirmation">
+        <h1>Are you sure You want to delete this record?</h1>
+        <div>
+          <IconButton onClick={erase}>yes</IconButton>
+          <IconButton onClick={() => setOpenModal()}>no</IconButton>
+        </div>
+      </div>
+    </Modal>
+  );
+};
+
+const EditModal = ({ openModal, handleChange, editedRow, stopEditing }) => (
+  <Modal open={openModal === 'edit'} className="modal">
+    <div className="confirmation">
+      <h1>You can edit the record now</h1>
+      <div className="recordEdit">
+        {textFields.map((field) => (
+          <TextField
+            key={field}
+            align="right"
+            placeholder={field}
+            onChange={(e) => handleChange(e, field)}
+            value={editedRow.field}
+          />
+        ))}
+      </div>
+      <IconButton onClick={() => stopEditing(editedRow.id)} aria-label="edit">
+        <CheckIcon />
+      </IconButton>
+    </div>
+  </Modal>
+);
+
+const EmailModal = ({ openModal, setOpenModal }) => (
+  <Modal open={openModal === 'email'} className="modal">
+    <div className="confirmation">
+      <h1>You need to provide email address to change record</h1>
+      <IconButton onClick={() => setOpenModal()}>OK</IconButton>
+    </div>
+  </Modal>
+);
+
 const TableOfPeople = ({ data, removeItem, editItem, request }) => {
   const [editedRow, setEditedRow] = useState(clearEditedRow);
-  const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const [openEmailModal, setOpenEmailModal] = useState(false);
-  const [openEditingModal, setOpenEditingModal] = useState(false);
+  const [openModal, setOpenModal] = useState();
   const [toBeEditedRecordId, setToBeEditedRecordId] = useState();
 
   const startEditing = (index, id) => {
-    setOpenEditingModal(true);
+    setOpenModal('edit');
     setToBeEditedRecordId(id);
   };
 
@@ -50,10 +112,10 @@ const TableOfPeople = ({ data, removeItem, editItem, request }) => {
     };
     if (editedRow.email.length > 0) {
       editItem(editedItem);
-      setOpenEditingModal(false);
+      setOpenModal();
       setEditedRow(clearEditedRow);
     } else {
-      setOpenEmailModal(true);
+      setOpenModal('email');
     }
   };
 
@@ -64,11 +126,11 @@ const TableOfPeople = ({ data, removeItem, editItem, request }) => {
 
   const confirmErase = (id) => {
     setToBeEditedRecordId(id);
-    setOpenDeleteModal(true);
+    setOpenModal('delete');
   };
 
   const erase = () => {
-    setOpenDeleteModal(false);
+    setOpenModal();
     removeItem(toBeEditedRecordId);
   };
 
@@ -79,13 +141,11 @@ const TableOfPeople = ({ data, removeItem, editItem, request }) => {
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell align="right">Name</TableCell>
-                <TableCell align="right">Surname</TableCell>
-                <TableCell align="right">Email</TableCell>
-                <TableCell align="right">City</TableCell>
-                <TableCell align="right">Country</TableCell>
-                <TableCell align="right">Thumbnail</TableCell>
-                <TableCell align="center">Actions</TableCell>
+                {tableHeaders.map((header) => (
+                  <TableCell key={header} align="right">
+                    {header}
+                  </TableCell>
+                ))}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -118,73 +178,18 @@ const TableOfPeople = ({ data, removeItem, editItem, request }) => {
             </TableBody>
           </Table>
         </TableContainer>
-        <Modal open={openEditingModal} className="modal">
-          <div className="confirmation">
-            <h1>You can edit the record now</h1>
-            <div className="recordEdit">
-              <TextField
-                align="right"
-                placeholder="first name"
-                onChange={(e) => handleChange(e, 'firstName')}
-                value={editedRow.firstName}
-              />
-              <TextField
-                align="right"
-                placeholder="last name"
-                onChange={(e) => handleChange(e, 'lastName')}
-                value={editedRow.lastName}
-              />
-              <TextField
-                align="right"
-                placeholder="email"
-                onChange={(e) => handleChange(e, 'email')}
-                value={editedRow.email}
-              />
-              <TextField
-                align="right"
-                placeholder="city"
-                onChange={(e) => handleChange(e, 'city')}
-                value={editedRow.city}
-              />
-              <TextField
-                align="right"
-                placeholder="country"
-                onChange={(e) => handleChange(e, 'country')}
-                value={editedRow.country}
-              />
-              <TextField
-                align="right"
-                placeholder="thumbnail"
-                id="textField"
-                onChange={(e) => handleChange(e, 'thumbnail')}
-                value={editedRow.thumbnail}
-              />
-            </div>
-            <IconButton
-              onClick={() => stopEditing(editedRow.id)}
-              aria-label="edit"
-            >
-              <CheckIcon />
-            </IconButton>
-          </div>
-        </Modal>
-        <Modal open={openDeleteModal} className="modal">
-          <div className="confirmation">
-            <h1>Are you sure You want to delete this record?</h1>
-            <div>
-              <IconButton onClick={erase}>yes</IconButton>
-              <IconButton onClick={() => setOpenDeleteModal(false)}>
-                no
-              </IconButton>
-            </div>
-          </div>
-        </Modal>
-        <Modal open={openEmailModal} className="modal">
-          <div className="confirmation">
-            <h1>You need to provide email address to change record</h1>
-            <IconButton onClick={() => setOpenEmailModal(false)}>OK</IconButton>
-          </div>
-        </Modal>
+        <EditModal
+          openModal={openModal}
+          handleChange={handleChange}
+          editedRow={editedRow}
+          stopEditing={stopEditing}
+        />
+        <DeleteModal
+          openModal={openModal}
+          erase={erase}
+          setOpenModal={setOpenModal}
+        />
+        <EmailModal openModal={openModal} setOpenModal={setOpenModal} />
       </>
     );
   return <h1> loading</h1>;
