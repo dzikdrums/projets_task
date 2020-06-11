@@ -25,6 +25,12 @@ const App = ({
     loadFromLocalServerRequest();
   }, [loadFromLocalServerRequest]);
 
+  useEffect(() => {
+    if (request.success === true && people.length === 0) {
+      loadFromExternalServerRequest();
+    }
+  }, [loadFromExternalServerRequest, request.success, people.length]);
+
   const editItem = (editedItem) => {
     editItemRequest(editedItem);
   };
@@ -32,12 +38,6 @@ const App = ({
   const removeItem = (id) => {
     removeItemRequest(id);
   };
-
-  useEffect(() => {
-    if (request.success === true && people.length === 0) {
-      loadFromExternalServerRequest();
-    }
-  }, [loadFromExternalServerRequest, request.success, people.length]);
 
   return (
     <>

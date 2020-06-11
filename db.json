@@ -1,17 +1,6 @@
 {
   "people": [
     {
-      "id": 7,
-      "name": {
-        "first": "12",
-        "last": "21"
-      },
-      "city": "1231",
-      "country": "123123",
-      "email": "332",
-      "thumbnail": "12313"
-    },
-    {
       "id": 8,
       "name": {
         "first": "Ira",

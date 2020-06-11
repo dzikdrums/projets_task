@@ -83,7 +83,7 @@ const EmailModal = ({ openModal, setOpenModal }) => (
   <Modal open={openModal === 'email'} className="modal">
     <div className="confirmation">
       <h1>You need to provide email address to change record</h1>
-      <IconButton onClick={() => setOpenModal()}>OK</IconButton>
+      <IconButton onClick={() => setOpenModal('edit')}>OK</IconButton>
     </div>
   </Modal>
 );
