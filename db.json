@@ -1,15 +1,3 @@
 {
-  "people": [
-    {
-      "id": 1,
-      "name": {
-        "first": "Maciej",
-        "last": "Dzik"
-      },
-      "city": "Kraków",
-      "country": "Poland",
-      "email": "dzikdrums@gmail.com",
-      "thumbnail": "1212"
-    }
-  ]
+  "people": []
 }
