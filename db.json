@@ -3,112 +3,13 @@
     {
       "id": 1,
       "name": {
-        "first": "Hanaé",
-        "last": "Fournier"
+        "first": "Maciej",
+        "last": "Dzik"
       },
-      "email": "hanae.fournier@example.com",
-      "city": "Strasbourg",
-      "country": "France",
-      "thumbnail": "https://randomuser.me/api/portraits/thumb/women/61.jpg"
-    },
-    {
-      "id": 4,
-      "name": {
-        "first": "Floyd",
-        "last": "Graves"
-      },
-      "email": "floyd.graves@example.com",
-      "city": "Vallejo",
-      "country": "United States",
-      "thumbnail": "https://randomuser.me/api/portraits/thumb/men/35.jpg"
-    },
-    {
-      "id": 5,
-      "name": {
-        "first": "Thomas",
-        "last": "Clarke"
-      },
-      "email": "thomas.clarke@example.com",
-      "city": "Upper Hutt",
-      "country": "New Zealand",
-      "thumbnail": "https://randomuser.me/api/portraits/thumb/men/15.jpg"
-    },
-    {
-      "id": 7,
-      "name": {
-        "first": "Emmi",
-        "last": "Schubert"
-      },
-      "email": "emmi.schubert@example.com",
-      "city": "Borna",
-      "country": "Germany",
-      "thumbnail": "https://randomuser.me/api/portraits/thumb/women/79.jpg"
-    },
-    {
-      "id": 6,
-      "name": {
-        "first": "Carlos",
-        "last": "Bell"
-      },
-      "email": "carlos.bell@example.com",
-      "city": "Australian Capital Territory",
-      "country": "Australia",
-      "thumbnail": "https://randomuser.me/api/portraits/thumb/men/47.jpg"
-    },
-    {
-      "id": 8,
-      "name": {
-        "first": "Kate",
-        "last": "de Souza"
-      },
-      "email": "kate.desouza@example.com",
-      "city": "Araguaína",
-      "country": "Brazil",
-      "thumbnail": "https://randomuser.me/api/portraits/thumb/women/69.jpg"
-    },
-    {
-      "id": 2,
-      "name": {
-        "first": "Jorge",
-        "last": "Peña"
-      },
-      "email": "jorge.pena@example.com",
-      "city": "Lorca",
-      "country": "Spain",
-      "thumbnail": "https://randomuser.me/api/portraits/thumb/men/5.jpg"
-    },
-    {
-      "id": 3,
-      "name": {
-        "first": "Sonia",
-        "last": "Ibañez"
-      },
-      "email": "sonia.ibanez@example.com",
-      "city": "Castellón de la Plana",
-      "country": "Spain",
-      "thumbnail": "https://randomuser.me/api/portraits/thumb/women/25.jpg"
-    },
-    {
-      "id": 9,
-      "name": {
-        "first": "Eleanor",
-        "last": "Silva"
-      },
-      "email": "eleanor.silva@example.com",
-      "city": "Norwich",
-      "country": "United Kingdom",
-      "thumbnail": "https://randomuser.me/api/portraits/thumb/women/24.jpg"
-    },
-    {
-      "id": 10,
-      "name": {
-        "first": "دینا",
-        "last": "نجاتی"
-      },
-      "email": "dyn.njty@example.com",
-      "city": "بابل",
-      "country": "Iran",
-      "thumbnail": "https://randomuser.me/api/portraits/thumb/women/67.jpg"
+      "city": "Kraków",
+      "country": "Poland",
+      "email": "dzikdrums@gmail.com",
+      "thumbnail": "1212"
     }
   ]
 }

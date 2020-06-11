@@ -14,25 +14,31 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
 
+const clearEditedRow = {
+  id: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  country: '',
+  city: '',
+  thumbnail: '',
+};
+
 const TableOfPeople = ({ data, removeItem, editItem, request }) => {
-  let [editIdx, setEditIdx] = useState(-1);
-  const [editedRow, setEditedRow] = useState();
-  const [open, setOpen] = useState(false);
+  const [editedRow, setEditedRow] = useState(clearEditedRow);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [openEmailModal, setOpenEmailModal] = useState(false);
-  const [toBeDeletedRecordId, setToBeDeletedRecordId] = useState();
+  const [openEditingModal, setOpenEditingModal] = useState(false);
+  const [toBeEditedRecordId, setToBeEditedRecordId] = useState();
 
   const startEditing = (index, id) => {
-    setEditIdx(id);
-    setEditedRow({
-      id: data[index].id,
-      email: '',
-    });
+    setOpenEditingModal(true);
+    setToBeEditedRecordId(id);
   };
 
   const stopEditing = (id) => {
-    setEditIdx(-1);
     const editedItem = {
-      id: editedRow.id,
+      id: toBeEditedRecordId,
       name: {
         first: editedRow.firstName,
         last: editedRow.lastName,
@@ -44,6 +50,8 @@ const TableOfPeople = ({ data, removeItem, editItem, request }) => {
     };
     if (editedRow.email.length > 0) {
       editItem(editedItem);
+      setOpenEditingModal(false);
+      setEditedRow(clearEditedRow);
     } else {
       setOpenEmailModal(true);
     }
@@ -51,18 +59,17 @@ const TableOfPeople = ({ data, removeItem, editItem, request }) => {
 
   const handleChange = (e, fieldName, id) => {
     const { value } = e.target;
-
     setEditedRow({ ...editedRow, [fieldName]: value });
   };
 
   const confirmErase = (id) => {
-    setToBeDeletedRecordId(id);
-    setOpen(true);
+    setToBeEditedRecordId(id);
+    setOpenDeleteModal(true);
   };
 
   const erase = () => {
-    setOpen(false);
-    removeItem(toBeDeletedRecordId);
+    setOpenDeleteModal(false);
+    removeItem(toBeEditedRecordId);
   };
 
   if (request.success === true && data.length > 0)
@@ -83,81 +90,14 @@ const TableOfPeople = ({ data, removeItem, editItem, request }) => {
             </TableHead>
             <TableBody>
               {data.map((row, index) => {
-                const currentlyEditing = editIdx === row.id;
                 return (
-                  <TableRow key={row.email}>
-                    <TableCell align="right">
-                      {currentlyEditing ? (
-                        <TextField
-                          align="right"
-                          name="firstName"
-                          onChange={(e) => handleChange(e, 'firstName', row.id)}
-                          value={editedRow.firstName}
-                        />
-                      ) : (
-                        row.name.first
-                      )}
-                    </TableCell>
-                    <TableCell align="right">
-                      {currentlyEditing ? (
-                        <TextField
-                          align="right"
-                          name="lastName"
-                          onChange={(e) => handleChange(e, 'lastName', row.id)}
-                          value={editedRow.lastName}
-                        />
-                      ) : (
-                        row.name.last
-                      )}
-                    </TableCell>
-                    <TableCell align="right">
-                      {currentlyEditing ? (
-                        <TextField
-                          align="right"
-                          name="email"
-                          onChange={(e) => handleChange(e, 'email', row.id)}
-                          value={editedRow.email}
-                        />
-                      ) : (
-                        row.email
-                      )}
-                    </TableCell>
-                    <TableCell align="right">
-                      {currentlyEditing ? (
-                        <TextField
-                          align="right"
-                          name="email"
-                          onChange={(e) => handleChange(e, 'city', row.id)}
-                          value={editedRow.city}
-                        />
-                      ) : (
-                        row.city
-                      )}
-                    </TableCell>
-                    <TableCell align="right">
-                      {currentlyEditing ? (
-                        <TextField
-                          align="right"
-                          name="country"
-                          onChange={(e) => handleChange(e, 'country', row.id)}
-                          value={editedRow.country}
-                        />
-                      ) : (
-                        row.country
-                      )}
-                    </TableCell>
-                    <TableCell align="right">
-                      {currentlyEditing ? (
-                        <TextField
-                          align="right"
-                          name="thumbnail"
-                          onChange={(e) => handleChange(e, 'thumbnail', row.id)}
-                          value={editedRow.thumbnail}
-                        />
-                      ) : (
-                        row.thumbnail
-                      )}
-                    </TableCell>
+                  <TableRow key={row.id}>
+                    <TableCell align="right">{row.name.first}</TableCell>
+                    <TableCell align="right">{row.name.last}</TableCell>
+                    <TableCell align="right">{row.email}</TableCell>
+                    <TableCell align="right">{row.city}</TableCell>
+                    <TableCell align="right">{row.country}</TableCell>
+                    <TableCell align="right">{row.thumbnail}</TableCell>
                     <TableCell align="center">
                       <IconButton
                         onClick={() => confirmErase(row.id)}
@@ -165,21 +105,12 @@ const TableOfPeople = ({ data, removeItem, editItem, request }) => {
                       >
                         <DeleteIcon />
                       </IconButton>
-                      {currentlyEditing ? (
-                        <IconButton
-                          onClick={() => stopEditing(row.id)}
-                          aria-label="edit"
-                        >
-                          <CheckIcon />
-                        </IconButton>
-                      ) : (
-                        <IconButton
-                          onClick={() => startEditing(index, row.id)}
-                          aria-label="edit"
-                        >
-                          <EditIcon />
-                        </IconButton>
-                      )}
+                      <IconButton
+                        onClick={() => startEditing(index, row.id)}
+                        aria-label="edit"
+                      >
+                        <EditIcon />
+                      </IconButton>
                     </TableCell>
                   </TableRow>
                 );
@@ -187,12 +118,64 @@ const TableOfPeople = ({ data, removeItem, editItem, request }) => {
             </TableBody>
           </Table>
         </TableContainer>
-        <Modal open={open} className="modal">
+        <Modal open={openEditingModal} className="modal">
+          <div className="confirmation">
+            <h1>You can edit the record now</h1>
+            <div className="recordEdit">
+              <TextField
+                align="right"
+                placeholder="first name"
+                onChange={(e) => handleChange(e, 'firstName')}
+                value={editedRow.firstName}
+              />
+              <TextField
+                align="right"
+                placeholder="last name"
+                onChange={(e) => handleChange(e, 'lastName')}
+                value={editedRow.lastName}
+              />
+              <TextField
+                align="right"
+                placeholder="email"
+                onChange={(e) => handleChange(e, 'email')}
+                value={editedRow.email}
+              />
+              <TextField
+                align="right"
+                placeholder="city"
+                onChange={(e) => handleChange(e, 'city')}
+                value={editedRow.city}
+              />
+              <TextField
+                align="right"
+                placeholder="country"
+                onChange={(e) => handleChange(e, 'country')}
+                value={editedRow.country}
+              />
+              <TextField
+                align="right"
+                placeholder="thumbnail"
+                id="textField"
+                onChange={(e) => handleChange(e, 'thumbnail')}
+                value={editedRow.thumbnail}
+              />
+            </div>
+            <IconButton
+              onClick={() => stopEditing(editedRow.id)}
+              aria-label="edit"
+            >
+              <CheckIcon />
+            </IconButton>
+          </div>
+        </Modal>
+        <Modal open={openDeleteModal} className="modal">
           <div className="confirmation">
             <h1>Are you sure You want to delete this record?</h1>
             <div>
               <IconButton onClick={erase}>yes</IconButton>
-              <IconButton onClick={() => setOpen(false)}>no</IconButton>
+              <IconButton onClick={() => setOpenDeleteModal(false)}>
+                no
+              </IconButton>
             </div>
           </div>
         </Modal>

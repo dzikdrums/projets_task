@@ -33,9 +33,11 @@ const App = ({
     removeItemRequest(id);
   };
 
-  if (request.success === true && people.length === 0) {
-    loadFromExternalServerRequest();
-  }
+  useEffect(() => {
+    if (request.success === true && people.length === 0) {
+      loadFromExternalServerRequest();
+    }
+  }, [loadFromExternalServerRequest, request.success, people.length]);
 
   return (
     <>
